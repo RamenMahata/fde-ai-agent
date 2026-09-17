@@ -4,17 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon --watch src --exec node src/server.js"
+    "start": "node backend/server.js",
+    "dev": "nodemon --watch backend --exec node backend/server.js",
+    "frontend:dev": "vite --config frontend/vite.config.js",
+    "frontend:build": "vite build --config frontend/vite.config.js",
+    "build": "npm run frontend:build"
   },
   "keywords": [],
   "type": "module",
   "dependencies": {
     "@google/genai": "^2.22.0",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@vitejs/plugin-react": "^5.0.2",
+    "nodemon": "^3.1.14",
+    "vite": "^7.1.5"
   }
 }

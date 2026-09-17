@@ -9,11 +9,7 @@ export const gemini = new GoogleGenAI({
     apiKey: env.geminiApiKey,
 });
 
-const defaultModel = "gemini-3.6-flash";
-export const model =
-    env.geminiModel && !["gemini-2.5-flash", "gemini-3.5-flash-lite"].includes(env.geminiModel)
-        ? env.geminiModel
-        : defaultModel;
+export const model = env.geminiModel;
 
 export const functionDeclarations = [
     {
@@ -74,3 +70,80 @@ export const functionDeclarations = [
         },
     },
 ];
+
+export const websiteTools = {
+  functionDeclarations: [
+    {
+      name: "createDirectory",
+      description:
+        "Creates a directory inside the generated-sites workspace.",
+      parametersJsonSchema: {
+        type: "object",
+        properties: {
+          path: {
+            type: "string",
+            description:
+              "Relative directory path, for example portfolio",
+          },
+        },
+        required: ["path"],
+      },
+    },
+
+    {
+      name: "writeFile",
+      description:
+        "Creates or overwrites a text file inside the generated-sites workspace.",
+      parametersJsonSchema: {
+        type: "object",
+        properties: {
+          path: {
+            type: "string",
+            description:
+              "Relative file path, for example portfolio/index.html",
+          },
+          content: {
+            type: "string",
+            description:
+              "Complete content that should be written into the file.",
+          },
+        },
+        required: ["path", "content"],
+      },
+    },
+
+    {
+      name: "readFile",
+      description:
+        "Reads the contents of an existing file inside the generated-sites workspace.",
+      parametersJsonSchema: {
+        type: "object",
+        properties: {
+          path: {
+            type: "string",
+            description:
+              "Relative file path.",
+          },
+        },
+        required: ["path"],
+      },
+    },
+
+    {
+      name: "listFiles",
+      description:
+        "Lists all files and directories inside a website project.",
+      parametersJsonSchema: {
+        type: "object",
+        properties: {
+          path: {
+            type: "string",
+            description:
+              "Relative directory path, for example portfolio.",
+          },
+        },
+        required: ["path"],
+      },
+    },
+  ],
+};
